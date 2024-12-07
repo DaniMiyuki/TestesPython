@@ -52,8 +52,97 @@ Quando você escreve testes no TDD, o padrão AAA ajuda a organizá-los de forma
 TDD depende de bons testes, e AAA fornece uma base sólida para isso.
 Com AAA, os testes ficam mais legíveis e intuitivos, o que é crucial para a prática de TDD.
 
-### Instalacoes 
+## Instalacoes 
 
-Use o comando `python -m venv venv` para criar um ambiente virtual.
-Intale as ferramentas para teste e covered: `pip install pytest pytest-cov`
-Atualize o pip, caso necessario: `python.exe -m pip install --upgrade pip`
+Use o comando `python -m venv venv` para criar um ambiente virtual.  
+Intale as ferramentas para teste e coverage: `pip install pytest pytest-cov`  
+Atualize o pip, caso necessario: `python.exe -m pip install --upgrade pip`  
+
+### Codificacao:
+```
+def romeu_e_julieta(val: int): 
+
+def test_romeu_e_julieta_deve_retornar_queijo():  
+ # Arrange
+    valor_de_input = 3
+    esperado = 'Queijo'
+
+# Act
+    resultado = romeu_e_julieta(valor_de_input)
+
+# Assert
+    assert resultado == esperado
+```
+
+
+1- Rode o pytest no arquivo: `pytest teste_r_e_j.py`  
+
+``` 
+MSG DE ERRO (None == 'Queijo'/ nao ouve implentacao na funcao)
+E       AssertionError: assert None == 'Queijo'
+
+teste_r_e_j.py:29: AssertionError
+=================== short test summary info ===================
+FAILED teste_r_e_j.py::test_romeu_e_julieta_deve_retornar_queijo  
+- AssertionError: assert None == 'Queijo'
+====================== 1 failed in 0.15s ======================
+```
+
+### Implentacao na funcao principal
+```
+def romeu_e_julieta(val: int): 
+    match val % 3 == 0, val % 5 == 0:
+        case [True, False]:
+            return 'Queijo'
+        case [False, True]:
+            return 'Goiabada'
+        case [True, True]:
+            return 'Romeu e Julieta'
+        case _:
+            return val
+
+def test_romeu_e_julieta_deve_retornar_queijo():  
+    valor_de_input = 3
+    esperado = 'Queijo'
+
+    resultado = romeu_e_julieta(valor_de_input)
+
+    assert resultado == esperado
+
+```
+
+2- Rode o pytest no arquivo: `pytest teste_r_e_j.py -v`  
+```
+============================== test session starts ===============================
+platform win32 -- Python 3.12.5, pytest-8.3.4, pluggy-1.5.0
+rootdir: C:\Users\miyuk\pythonProject\TestesPython
+plugins: cov-6.0.0
+collected 1 item
+
+teste_r_e_j.py::test_romeu_e_julieta_deve_retornar_queijo PASSED           [100%]
+
+=============================== 1 passed in 0.08s =================================
+```
+
+Agora vamos melhorar os testes com o coverage que passa por cada case.
+Execute: `pytest teste_r_e_j.py -v --cov=teste_r_e_j`
+
+```
+teste_r_e_j.py::test_romeu_e_julieta_deve_retornar_queijo PASSED                                    [100%]
+
+---------- coverage: platform win32, python 3.12.5-final-0 -----------
+Name             Stmts   Miss  Cover
+------------------------------------
+teste_r_e_j.py      15      6    60%
+------------------------------------
+TOTAL               15      6    60%
+
+
+================================= 1 passed in 0.13s ==============================
+```
+
+Criando o coverage no HTML: `coverage html`
+
+Abra a pag index.html e clique no file teste_r_e_j.py
+
+![alt text](image.png)
