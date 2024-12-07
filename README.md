@@ -51,3 +51,9 @@ Quando você escreve testes no TDD, o padrão AAA ajuda a organizá-los de forma
 
 TDD depende de bons testes, e AAA fornece uma base sólida para isso.
 Com AAA, os testes ficam mais legíveis e intuitivos, o que é crucial para a prática de TDD.
+
+### Instalacoes 
+
+Use o comando `python -m venv venv` para criar um ambiente virtual.
+Intale as ferramentas para teste e covered: `pip install pytest pytest-cov`
+Atualize o pip, caso necessario: `python.exe -m pip install --upgrade pip`
