@@ -146,3 +146,104 @@ Criando o coverage no HTML: `coverage html`
 Abra a pag index.html e clique no file teste_r_e_j.py
 
 ![alt text](image.png)
+
+Iniciando o case 2:
+```
+def test_romeu_e_julieta_deve_retornar_goiabada():
+    valor_de_input = 5
+    esperado = 'Goiabada'
+
+    resultado = romeu_e_julieta(valor_de_input)
+
+    assert resultado == esperado
+```
+
+
+```
+===================== test session starts =====================
+platform win32 -- Python 3.12.5, pytest-8.3.4, pluggy-1.5.0 -- C:\Users\miyuk\pythonProject\TestesPython\venv\Scripts\python.exe
+cachedir: .pytest_cache
+
+teste_r_e_j.py::test_romeu_e_julieta_deve_retornar_queijo PASSED [ 50%]
+teste_r_e_j.py::test_romeu_e_julieta_deve_retornar_goiabada PASSED [100%]
+
+---------- coverage: platform win32, python 3.12.5-final-0 -----------
+Name             Stmts   Miss  Cover
+------------------------------------
+teste_r_e_j.py      11      0   100%
+------------------------------------
+TOTAL               11      0   100%
+
+
+====================== 2 passed in 0.14s ======================
+```
+teste do case 3:
+
+```
+def test_romeu_e_julieta_deve_retornar_ReJ():
+    valor_de_input = 15  # este valor e multiplo de 3 e 5 ao mesmo tempo como e esperado na funcao
+    esperado = 'Romeu e Julieta'
+
+    resultado = romeu_e_julieta(valor_de_input)
+
+    assert resultado == esperado
+```
+
+```
+========================== test session starts ==========================
+
+platform win32 -- Python 3.12.5, pytest-8.3.4, pluggy-1.5.0 -- C:\Users\miyuk\pythonProject\TestesPython\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\miyuk\pythonProject\TestesPython
+plugins: cov-6.0.0
+collected 3 items
+
+teste_r_e_j.py::test_romeu_e_julieta_deve_retornar_queijo PASSED                        [ 33%] 
+teste_r_e_j.py::test_romeu_e_julieta_deve_retornar_goiabada PASSED                      [ 66%] 
+teste_r_e_j.py::test_romeu_e_julieta_deve_retornar_ReJ PASSED                           [100%]
+
+---------- coverage: platform win32, python 3.12.5-final-0 -----------
+Name             Stmts   Miss  Cover
+------------------------------------
+teste_r_e_j.py      16      0   100%
+------------------------------------
+TOTAL               16      0   100%
+
+
+=========================== 3 passed in 0.14s ===========================
+```
+
+Ultimo teste:
+```
+def test_romeu_e_julieta_deve_retornar_val():
+    valor_de_input = 1  # este valor nao e multiplo de 3 nem 5 como e esperado na funcao
+    esperado = 1
+
+    resultado = romeu_e_julieta(valor_de_input)
+
+    assert resultado == esperado
+```
+
+```
+==================================== test session starts =====================================
+platform win32 -- Python 3.12.5, pytest-8.3.4, pluggy-1.5.0 -- C:\Users\miyuk\pythonProject\TestesPython\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\miyuk\pythonProject\TestesPython
+plugins: cov-6.0.0
+collected 4 items
+
+teste_r_e_j.py::test_romeu_e_julieta_deve_retornar_queijo PASSED                        [ 25%] 
+teste_r_e_j.py::test_romeu_e_julieta_deve_retornar_goiabada PASSED                      [ 50%] 
+teste_r_e_j.py::test_romeu_e_julieta_deve_retornar_ReJ PASSED                           [ 75%] 
+teste_r_e_j.py::test_romeu_e_julieta_deve_retornar_val PASSED                           [100%] 
+
+---------- coverage: platform win32, python 3.12.5-final-0 -----------
+Name             Stmts   Miss  Cover
+------------------------------------
+teste_r_e_j.py      21      0   100%
+------------------------------------
+TOTAL               21      0   100%
+
+
+========================== 4 passed in 0.14s =========================
+```
