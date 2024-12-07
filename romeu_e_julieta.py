@@ -1,6 +1,6 @@
 # FizzBuzz
 
-def romeu_e_julieta(val: int):
+def Romeu_e_julieta(val: int):
     """
     Param:
         val: int (numero)

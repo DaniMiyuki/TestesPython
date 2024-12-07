@@ -73,7 +73,7 @@ def test_romeu_e_julieta_deve_retornar_queijo():
 # Assert
     assert resultado == esperado
 ```
-
+## Teste de COMPORTAMENTO
 
 1- Rode o pytest no arquivo: `pytest teste_r_e_j.py`  
 
@@ -247,3 +247,41 @@ TOTAL               21      0   100%
 
 ========================== 4 passed in 0.14s =========================
 ```
+
+## Teste de SCHEMA(Validacao)
+```
+Todo List
+
+from dataclasses import dataclass
+
+@dataclass
+class Tarefa:
+    id: int
+    nome: str
+    status: str = 'a fazer'
+```  
+
+Rodando o teste: `pytest teste_tarefa.py -v --cov=teste_tarefa`  
+
+```
+===================== test session starts =====================
+platform win32 -- Python 3.12.5, pytest-8.3.4, pluggy-1.5.0 -- C:\Users\miyuk\pythonProject\TestesPython\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\miyuk\pythonProject\TestesPython
+plugins: cov-6.0.0
+collected 1 item
+
+teste_tarefa.py::teste_Tarefa_deve_conter_os_campos_id_nome_status PASSED [100%]
+
+---------- coverage: platform win32, python 3.12.5-final-0 -----------
+Name              Stmts   Miss  Cover
+-------------------------------------
+teste_tarefa.py       9      0   100%
+-------------------------------------
+TOTAL                 9      0   100%
+
+
+====================== 1 passed in 0.15s ====================== 
+```
+
+## Teste de DOC
