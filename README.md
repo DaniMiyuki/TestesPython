@@ -285,3 +285,169 @@ TOTAL                 9      0   100%
 ```
 
 ## Teste de DOC
+```
+from tarefa import Tarefa
+Lista de tarefas 
+
+class ListaDeTarefas:
+    """
+    (Teste de DOC - Depende de outro componente para ser testado, 
+    no caso ele depende do Tarefa)
+
+    """
+    def __init__(self) -> None:
+        self.tarefas: list[Tarefa] = []
+        self.contador_de_id = 1 # inicia sempre em 1
+
+    def cria_tarefa(self, nome, status='a fazer') -> None:
+        t = Tarefa(self.contador_de_id, nome, status) # cada tarefa criada, armazena na variavel t
+        self.tarefas.append(t)  # a lista terefas adiciona cada t(tarefa)
+        self.contador_de_id += 1
+
+        return t
+    def atualiza_tarefa(
+            self,
+            identificador: int,
+            nome: str | None = None,
+            status: str | None = None
+    ) -> None:
+        for tarefa in self.tarefas:
+            if tarefa.id == identificador:
+                if nome:
+                    tarefa.nome = nome
+                if status:
+                    tarefa.status = status
+                break
+
+    def deletar_tarefa(self, identificador: int) -> None:
+        for tarefa in self.tarefas:
+            if tarefa.id == identificador:
+                self.tarefas.remove(tarefa)
+            break
+    
+    def recuperar_tarefa(self, identificador: int) -> Tarefa | None:
+        for tarefa in self.tarefas:
+            if tarefa.id == identificador:
+                return tarefa
+        return None
+```
+
+`pytest teste_lista_tarefas.py -v --cov=lista_de_tarefas`
+
+```
+==================== test session starts =====================
+platform win32 -- Python 3.12.5, pytest-8.3.4, pluggy-1.5.0 -- C:\Users\miyuk\pythonProject\TestesPython\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\miyuk\pythonProject\TestesPython
+plugins: cov-6.0.0
+collected 0 items
+
+
+---------- coverage: platform win32, python 3.12.5-final-0 -----------
+Name                  Stmts   Miss  Cover
+-----------------------------------------
+lista_de_tarefas.py      28     21    25%
+-----------------------------------------
+TOTAL                    28     21    25%
+
+==================== no tests ran in 0.11s ====================
+```
+![alt text](image-1.png)
+
+`pytest teste_lista_tarefas.py -v --cov=lista_de_tarefas`
+
+```
+from lista_de_tarefas import ListaDeTarefas
+
+def teste_lista_de_tarefas_criar_tarefas():
+    # Arrange
+    ldt = ListaDeTarefas()
+    nome = 'test'
+
+    # Act
+    t = ldt.cria_tarefa(nome)
+
+    # Assert
+    assert ldt.recuperar_tarefa(t.id)
+    assert t.nome == nome
+    assert t.status == 'a fazer'
+```
+
+![alt text](image-2.png)
+
+```
+def teste_lista_de_tarefas_recuperar_tarefa():
+    ldt = ListaDeTarefas()
+
+    # garante q veio None
+    assert not ldt.recuperar_tarefa(10)
+```
+
+![alt text](image-3.png)
+
+```
+def teste_lista_de_tarefas_deletar_tarefa():
+    # Arrange: Configura os objetos iniciais
+    lista = ListaDeTarefas()
+    tarefa1 = lista.cria_tarefa("Tarefa 1")
+    tarefa2 = lista.cria_tarefa("Tarefa 2")
+    
+    assert len(lista.tarefas) == 2  # Garantir que temos duas tarefas inicialmente
+    
+    # Act: Executa o método a ser testado
+    lista.deletar_tarefa(tarefa1.id)
+    
+    # Assert: Verifica os resultados
+    assert len(lista.tarefas) == 1  # Deve sobrar apenas uma tarefa
+    assert lista.recuperar_tarefa(tarefa1.id) is None  # A tarefa deletada não deve existir
+    assert lista.recuperar_tarefa(tarefa2.id) is not None  # A tarefa restante deve existir
+```
+![alt text](image-4.png)
+
+```
+from tarefa import Tarefa
+from lista_de_tarefas import ListaDeTarefas
+
+def test_atualiza_tarefa():
+    # Arrange: Configuração inicial
+    lista = ListaDeTarefas()
+    tarefa1 = lista.cria_tarefa("Tarefa Inicial", "a fazer")
+
+    # Garantir que a tarefa foi criada corretamente
+    assert tarefa1.nome == "Tarefa Inicial"
+    assert tarefa1.status == "a fazer"
+
+    # Act: Atualizar o nome e status da tarefa
+    lista.atualiza_tarefa(tarefa1.id, nome="Tarefa Atualizada", status="concluído")
+
+    # Assert: Verificar se a tarefa foi atualizada
+    tarefa_atualizada = lista.recuperar_tarefa(tarefa1.id)
+    assert tarefa_atualizada is not None
+    assert tarefa_atualizada.nome == "Tarefa Atualizada"
+    assert tarefa_atualizada.status == "concluído"
+```
+
+```
+==================================== test session starts =====================================
+platform win32 -- Python 3.12.5, pytest-8.3.4, pluggy-1.5.0 -- C:\Users\miyuk\pythonProject\TestesPython\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\miyuk\pythonProject\TestesPython
+plugins: cov-6.0.0
+collected 4 items
+
+teste_lista_tarefas.py::teste_lista_de_tarefas_criar_tarefas PASSED                     [ 25%] 
+teste_lista_tarefas.py::teste_lista_de_tarefas_recuperar_tarefa PASSED                  [ 50%]
+teste_lista_tarefas.py::teste_lista_de_tarefas_deletar_tarefa PASSED                    [ 75%] 
+teste_lista_tarefas.py::test_atualiza_tarefa PASSED                                     [100%] 
+
+---------- coverage: platform win32, python 3.12.5-final-0 -----------
+Name                  Stmts   Miss  Cover
+-----------------------------------------
+lista_de_tarefas.py      28      0   100%
+-----------------------------------------
+TOTAL                    28      0   100%
+
+
+===================================== 4 passed in 0.29s ======================================
+```
+![alt text](image-5.png)
