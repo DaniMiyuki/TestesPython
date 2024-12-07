@@ -386,6 +386,9 @@ def teste_lista_de_tarefas_recuperar_tarefa():
 ![alt text](image-3.png)
 
 ```
+from tarefa import Tarefa
+from lista_de_tarefas import ListaDeTarefas
+
 def teste_lista_de_tarefas_deletar_tarefa():
     # Arrange: Configura os objetos iniciais
     lista = ListaDeTarefas()

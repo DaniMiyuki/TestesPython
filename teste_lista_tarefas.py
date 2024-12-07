@@ -1,4 +1,6 @@
 from lista_de_tarefas import ListaDeTarefas
+from tarefa import Tarefa  
+
 
 def teste_lista_de_tarefas_criar_tarefas():
     # Arrange
@@ -19,8 +21,6 @@ def teste_lista_de_tarefas_recuperar_tarefa():
     # garante q veio None
     assert not ldt.recuperar_tarefa(10)
 
-from tarefa import Tarefa  # Classe importada
-from lista_de_tarefas import ListaDeTarefas  # Supondo que o código acima está neste arquivo
 
 def teste_lista_de_tarefas_deletar_tarefa():
     # Arrange: Configura os objetos iniciais
@@ -39,8 +39,6 @@ def teste_lista_de_tarefas_deletar_tarefa():
     assert lista.recuperar_tarefa(tarefa2.id) is not None  # A tarefa restante deve existir
 
 
-from tarefa import Tarefa
-from lista_de_tarefas import ListaDeTarefas
 
 def test_atualiza_tarefa():
     # Arrange: Configuração inicial
